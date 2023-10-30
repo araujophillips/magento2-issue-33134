@@ -1,0 +1,28 @@
+--- /Model/Sales/Total/Quote/CommonTaxCollector.php
++++ /Model/Sales/Total/Quote/CommonTaxCollector.php
+@@ -684,25 +684,21 @@
+      * Update tax related fields for quote item
+      *
+      * @param AbstractItem $quoteItem
+      * @param TaxDetailsItemInterface $itemTaxDetails
+      * @param TaxDetailsItemInterface $baseItemTaxDetails
+      * @param Store $store
+      * @return $this
+      */
+     public function updateItemTaxInfo($quoteItem, $itemTaxDetails, $baseItemTaxDetails, $store)
+     {
+-        //The price should be base price
+         $quoteItem->setPrice($baseItemTaxDetails->getPrice());
+-        if ($quoteItem->getCustomPrice() && $this->taxHelper->applyTaxOnCustomPrice()) {
+-            $quoteItem->setCustomPrice($baseItemTaxDetails->getPrice());
+-        }
+         $quoteItem->setConvertedPrice($itemTaxDetails->getPrice());
+         $quoteItem->setPriceInclTax($itemTaxDetails->getPriceInclTax());
+         $quoteItem->setRowTotal($itemTaxDetails->getRowTotal());
+         $quoteItem->setRowTotalInclTax($itemTaxDetails->getRowTotalInclTax());
+         $quoteItem->setTaxAmount($itemTaxDetails->getRowTax());
+         $quoteItem->setTaxPercent($itemTaxDetails->getTaxPercent());
+         $quoteItem->setDiscountTaxCompensationAmount($itemTaxDetails->getDiscountTaxCompensationAmount());
+ 
+         $quoteItem->setBasePrice($baseItemTaxDetails->getPrice());
+         $quoteItem->setBasePriceInclTax($baseItemTaxDetails->getPriceInclTax());

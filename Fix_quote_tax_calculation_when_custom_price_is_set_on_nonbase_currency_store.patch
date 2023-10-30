@@ -1,0 +1,33 @@
+--- /Model/Quote/Item/AbstractItem.php
++++ /Model/Quote/Item/AbstractItem.php
+@@ -439,28 +439,28 @@
+
+     /**
+      * Get item price used for quote calculation process.
+      *
+      * This method get original custom price applied before tax calculation
+      *
+      * @return float
+      */
+     public function getCalculationPriceOriginal()
+     {
+-        $price = $this->_getData('calculation_price');
++        $price = $this->_getData('calculation_price_original');
+         if ($price === null) {
+             if ($this->hasOriginalCustomPrice()) {
+                 $price = $this->getOriginalCustomPrice();
+             } else {
+                 $price = $this->getConvertedPrice();
+             }
+-            $this->setData('calculation_price', $price);
++            $this->setData('calculation_price_original', $price);
+         }
+         return $price;
+     }
+ 
+     /**
+      * Get calculation price used for quote calculation in base currency.
+      *
+      * @return float
+      */
+     public function getBaseCalculationPrice()
